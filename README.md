@@ -11,17 +11,19 @@ chmod +x setup.sh
 sed -i 's/\r//' setup.sh
 ./setup.sh
 # Güvenlik Duvarı Kurallarının Tanımlanması
-DirectAdmin ve ilişkili hizmetlerin dışarıdan erişilebilir olması için, aşağıdaki portları açın:
+* DirectAdmin ve ilişkili hizmetlerin dışarıdan erişilebilir olması için, aşağıdaki portları açın:
+```bash
+
 firewall-cmd --zone=public --add-port=2222/tcp --permanent
 firewall-cmd --zone=public --add-port=21/tcp --permanent
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --zone=public --add-port=25/tcp --permanent
 firewall-cmd --reload
+```
 # DirectAdmin ve Sistem Yapılandırmaları
 DirectAdmin ve sistem yapılandırmalarını güncelleyerek, lisans anahtarını yeniler ve IP adresi ayarlarını güncelleriz.
-bash
-Copy code
+```bash
 systemctl restart directadmin
 cd /usr/local/directadmin/conf/
 service directadmin stop
@@ -29,7 +31,11 @@ rm -rf /usr/local/directadmin/conf/license.key
 wget -O /usr/local/directadmin/conf/license.key 'http://ekasunucu.com/getLic.php'
 chmod 600 /usr/local/directadmin/conf/license.key
 chown diradmin:diradmin /usr/local/directadmin/conf/license.key
+```
+
 # IP adresi ve ağ ayarlarını yapılandırma:
+```bash
+
 ifconfig eth0:100 176.99.3.34 netmask 255.0.0.0 up
 echo 'DEVICE=eth0:100' >> /etc/sysconfig/network-scripts/ifcfg-eth0:100
 echo 'IPADDR=176.99.3.34' >> /etc/sysconfig/network-scripts/ifcfg-eth0:100
@@ -44,13 +50,19 @@ chown diradmin:diradmin license.key
 chmod 600 license.key
 /usr/bin/perl -pi -e 's/^IPADDR=.*/IPADDR=176.99.3.34/' /etc/sysconfig/network-scripts/ifcfg-eth0:100
 ifup eth0:100;service directadmin restart;ifdown eth0:100
-DirectAdmin güncellemesi:
+```
+
+# DirectAdmin güncellemesi:
+```bash
+
 cd /usr/local/directadmin
 wget -O update.tar.gz https://github.com/ekayazilim/DirectAdmin/raw/main/update.tar.gz
 tar xvzf update.tar.gz
 ./directadmin p
 cd scripts
 ./update.sh
+```
+
 Ağ arayüzünü yeniden başlatma:
 ifup eth0:100;service directadmin restart;ifdown eth0:100
 ifdown eth0:100
