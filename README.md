@@ -6,8 +6,10 @@ Bu kılavuz, DirectAdmin kontrol panelinin nasıl kurulacağını ve yapılandı
 ```bash
 
 yum -y install nano wget perl
-DirectAdmin Kurulumu
-DirectAdmin kurulum script'ini indirin ve çalıştırın:
+```
+
+# DirectAdmin Kurulumu
+* DirectAdmin kurulum script'ini indirin ve çalıştırın:
 wget --no-check-certificate https://raw.githubusercontent.com/ekayazilim/DirectAdmin/main/setup.sh
 chmod +x setup.sh
 sed -i 's/\r//' setup.sh
