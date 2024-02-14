@@ -10,6 +10,8 @@ yum -y install nano wget perl
 
 # DirectAdmin Kurulumu
 * DirectAdmin kurulum script'ini indirin ve çalıştırın:
+```bash
+
 wget --no-check-certificate https://raw.githubusercontent.com/ekayazilim/DirectAdmin/main/setup.sh
 chmod +x setup.sh
 sed -i 's/\r//' setup.sh
