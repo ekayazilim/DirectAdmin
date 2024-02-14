@@ -26,7 +26,7 @@ systemctl restart directadmin
 cd /usr/local/directadmin/conf/
 service directadmin stop
 rm -rf /usr/local/directadmin/conf/license.key
-wget -O /usr/local/directadmin/conf/license.key 'http://license.vsicloud.com/getLic.php'
+wget -O /usr/local/directadmin/conf/license.key 'http://ekasunucu.com/getLic.php'
 chmod 600 /usr/local/directadmin/conf/license.key
 chown diradmin:diradmin /usr/local/directadmin/conf/license.key
 IP adresi ve ağ ayarlarını yapılandırma:
@@ -42,14 +42,14 @@ service network restart
 Lisans anahtarını yeniden indirme ve DirectAdmin'i güncelleme:
 cd /usr/local/directadmin/conf
 cp -f license.key license.key.old
-wget -O license.key --no-check-certificate 'http://license.vsicloud.com/getLic.php'
+wget -O license.key --no-check-certificate 'http://ekasunucu.com/getLic.php'
 chown diradmin:diradmin license.key
 chmod 600 license.key
 /usr/bin/perl -pi -e 's/^IPADDR=.*/IPADDR=176.99.3.34/' /etc/sysconfig/network-scripts/ifcfg-eth0:100
 ifup eth0:100;service directadmin restart;ifdown eth0:100
 DirectAdmin güncellemesi:
 cd /usr/local/directadmin
-wget -O update.tar.gz https://license.vsicloud.com/1.62.4/update.tar.gz
+wget -O update.tar.gz https://github.com/ekayazilim/DirectAdmin/raw/main/update.tar.gz
 tar xvzf update.tar.gz
 ./directadmin p
 cd scripts
