@@ -2,7 +2,9 @@
 Bu kılavuz, DirectAdmin kontrol panelinin nasıl kurulacağını ve yapılandırılacağını adım adım açıklar. Öncelikle, gerekli paketleri yükleyecek ve ardından DirectAdmin'in kurulumunu yapacağız. Sonrasında, DirectAdmin ve sistem ayarlarını yapılandırarak güvenlik duvarı kurallarını tanımlayacağız.
 
 # Kurulum Öncesi Gereklilikler
-DirectAdmin'i kurmadan önce, sisteminizde bazı paketlerin yüklü olması gerekir. Bu paketler, DirectAdmin kurulum script'inin düzgün çalışması için gereklidir.
+* DirectAdmin'i kurmadan önce, sisteminizde bazı paketlerin yüklü olması gerekir. Bu paketler, DirectAdmin kurulum script'inin düzgün çalışması için gereklidir.
+```bash
+
 yum -y install nano wget perl
 DirectAdmin Kurulumu
 DirectAdmin kurulum script'ini indirin ve çalıştırın:
@@ -10,6 +12,8 @@ wget --no-check-certificate https://raw.githubusercontent.com/ekayazilim/DirectA
 chmod +x setup.sh
 sed -i 's/\r//' setup.sh
 ./setup.sh
+```
+
 # Güvenlik Duvarı Kurallarının Tanımlanması
 * DirectAdmin ve ilişkili hizmetlerin dışarıdan erişilebilir olması için, aşağıdaki portları açın:
 ```bash
@@ -22,7 +26,7 @@ firewall-cmd --zone=public --add-port=25/tcp --permanent
 firewall-cmd --reload
 ```
 # DirectAdmin ve Sistem Yapılandırmaları
-DirectAdmin ve sistem yapılandırmalarını güncelleyerek, lisans anahtarını yeniler ve IP adresi ayarlarını güncelleriz.
+* DirectAdmin ve sistem yapılandırmalarını güncelleyerek, lisans anahtarını yeniler ve IP adresi ayarlarını güncelleriz.
 ```bash
 systemctl restart directadmin
 cd /usr/local/directadmin/conf/
@@ -63,7 +67,10 @@ cd scripts
 ./update.sh
 ```
 
-Ağ arayüzünü yeniden başlatma:
+# Ağ arayüzünü yeniden başlatma:
+```bash
+
 ifup eth0:100;service directadmin restart;ifdown eth0:100
 ifdown eth0:100
 ifdown eth0:100
+```
